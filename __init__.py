@@ -3,6 +3,6 @@ import azure.functions as func
 def main(req: func.HttpRequest) -> func.HttpResponse:
     name = req.params.get('name')
     if name:
-        return func.HttpResponse(f"Hello world hahaha, {name}!")
+        return func.HttpResponse(f"Hello world mais sans hahaha, {name}!")
     else:
         return func.HttpResponse("Please provide a name parameter in the query string.", status_code=400)

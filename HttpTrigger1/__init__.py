@@ -7,6 +7,8 @@ from heapq import nlargest
 clicks_df = pd.read_csv('clicks_df.csv')
 with open('model_small.pkl', 'rb') as file:
     model = pickle.load(file)
+    
+## test
 
 def get_top_n_articles_for_user(user_id, n=5):
     

@@ -17,6 +17,7 @@ def get_top_n_articles_for_user(user_id, n=5):
     # Get list of articles that the user has already clicked on
     articles_read = clicks_df.loc[clicks_df['user_id'] == user_id, 'click_article_id'].tolist()#[:1]
 
+    
     # Remove articles that the user has already read from the articles index
     articles_to_recommend = [article for article in articles if article not in articles_read]
         
@@ -27,6 +28,8 @@ def get_top_n_articles_for_user(user_id, n=5):
 
     # Return the top n articles with the highest predicted ratings
     return nlargest(n, results, key=results.get)
+
+
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')

@@ -12,6 +12,8 @@ clicks_df = pd.read_csv('clicks_df.csv')
 
 def get_top_n_articles_for_user(user_id, n=5):
     
+    user_id = int(user_id)
+    
     articles = clicks_df['click_article_id'].unique()
     # Get list of articles that the user has already clicked on
     articles_read = clicks_df.loc[clicks_df['user_id'] == user_id, 'click_article_id'].tolist()
@@ -26,9 +28,10 @@ def get_top_n_articles_for_user(user_id, n=5):
 
     # Sort the results dictionary by value in descending order
     sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
+
     #random_items = random.sample(articles_to_recommend, 5)
     # Return the top n articles with the highest predicted ratings
-    return user_id, [sorted_results[i][0] for i in range(min(n, len(sorted_results)))]
+    return user_id,[sorted_results[i][0] for i in range(min(n, len(sorted_results)))]
 
 
 

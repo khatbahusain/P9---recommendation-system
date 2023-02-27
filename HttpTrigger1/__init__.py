@@ -31,7 +31,7 @@ def get_top_n_articles_for_user(user_id, n=5):
 
     #random_items = random.sample(articles_to_recommend, 5)
     # Return the top n articles with the highest predicted ratings
-    return user_id,[sorted_results[i][0] for i in range(min(n, len(sorted_results)))]
+    return [sorted_results[i][0] for i in range(min(n, len(sorted_results)))]
 
 
 

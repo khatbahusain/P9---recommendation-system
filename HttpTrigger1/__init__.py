@@ -7,6 +7,7 @@ from heapq import nlargest
 with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
 
+
 clicks_df = pd.read_csv('/clicks_df.csv')
 
 

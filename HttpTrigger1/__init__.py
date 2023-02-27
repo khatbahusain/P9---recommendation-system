@@ -4,9 +4,11 @@ import pickle
 import pandas as pd
 from heapq import nlargest
 
-clicks_df = pd.read_csv('clicks_df.csv')
 with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
+
+clicks_df = pd.read_csv('/clicks_df.csv')
+
 
 def get_top_n_articles_for_user(user_id, n=5):
     

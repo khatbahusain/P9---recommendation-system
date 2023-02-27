@@ -10,14 +10,12 @@ with open('model.pkl', 'rb') as file:
 
 clicks_df = pd.read_csv('clicks_df.csv')
 
-
 def get_top_n_articles_for_user(user_id, n=5):
     
     articles = clicks_df['click_article_id'].unique()
     # Get list of articles that the user has already clicked on
-    articles_read = clicks_df.loc[clicks_df['user_id'] == user_id, 'click_article_id'].tolist()#[:1]
+    articles_read = clicks_df.loc[clicks_df['user_id'] == user_id, 'click_article_id'].tolist()
 
-    
     # Remove articles that the user has already read from the articles index
     articles_to_recommend = [article for article in articles if article not in articles_read]
         
@@ -26,8 +24,12 @@ def get_top_n_articles_for_user(user_id, n=5):
     
     results = {rating.iid: rating.est for rating in user_ratings}
 
+    # Sort the results dictionary by value in descending order
+    sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
+
     # Return the top n articles with the highest predicted ratings
-    return nlargest(n, results, key=results.get)
+    return [sorted_results[i][0] for i in range(min(n, len(sorted_results)))]
+
 
 
 

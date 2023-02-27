@@ -3,16 +3,14 @@ import azure.functions as func
 import pickle
 import pandas as pd
 from heapq import nlargest
-#test
+
 clicks_df = pd.read_csv('clicks_df.csv')
 with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
-    
-## test
 
 def get_top_n_articles_for_user(user_id, n=5):
     
-    articles = list(range(364047))
+    articles = clicks_df['click_article_id'].unique()
     # Get list of articles that the user has already clicked on
     articles_read = clicks_df.loc[clicks_df['user_id'] == user_id, 'click_article_id'].tolist()#[:1]
 
@@ -27,7 +25,6 @@ def get_top_n_articles_for_user(user_id, n=5):
     # Return the top n articles with the highest predicted ratings
     return nlargest(n, results, key=results.get)
 
-#test
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
